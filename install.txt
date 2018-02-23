@@ -1,0 +1,26 @@
+------------------------
+   Integration Steps
+------------------------
+
+1.) Get Linux BSP for s32v234, version >= 15.0. Yocto can be used which provides all parts:
+    - BSP Linux,
+    - BSP u-boot,
+    - any compatible rootfs.
+
+2.) Apply patches:
+    - custom_sm_vector to u-boot,
+    - devtree-reserved_memory to Linux (possible to change memory size & address), 
+    - fec-separate_queues is not needed for sm_drv (provides separate Ethernet queues not handled by Linux).
+
+3.) Configure u-boot before build:
+    - In this option: ARM Architecture -> Support custom secure monitor vector on ARMv8.
+
+4.) Build u-boot and Linux.
+
+5.) Build SM driver against previously built Linux. Example commands:
+    cd $SM_DRV_REPOSITORY_DIR/driver &&
+    make KERNELDIR=$LINUX_PATH ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu-
+
+6.) Create and build SM application, name the binary theA5App.bin
+
+7.) Load the SM driver (insmod sm_drv.ko) which automatically loads theA5App.bin from current working directory.

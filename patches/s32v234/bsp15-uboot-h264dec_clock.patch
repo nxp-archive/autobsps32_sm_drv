@@ -1,0 +1,21 @@
+diff --git a/arch/arm/include/asm/arch-s32/mc_cgm_regs.h b/arch/arm/include/asm/arch-s32/mc_cgm_regs.h
+old mode 100644
+new mode 100755
+index ea7136e..90f7288
+--- a/arch/arm/include/asm/arch-s32/mc_cgm_regs.h
++++ b/arch/arm/include/asm/arch-s32/mc_cgm_regs.h
+@@ -220,10 +220,11 @@
+ 
+ #define ENET_PLL_PHI0_FREQ			(500000000)
+ #define ENET_PLL_PHI1_FREQ			(1000000000)
+-/* ENET_PLL_PHI1_DFS1_FREQ - 350 Mhz*/
++/* ENET_PLL_PHI1_DFS1_FREQ - 160 MHz - h.264 decoder */
++/* F_out = F_in/(mfi + (mfn/256)) = 160MHz, F_in=1000Mhz */
+ #define ENET_PLL_PHI1_DFS1_EN		(1)
+-#define ENET_PLL_PHI1_DFS1_MFI		(2)
+-#define ENET_PLL_PHI1_DFS1_MFN		(219)
++#define ENET_PLL_PHI1_DFS1_MFI		(6)
++#define ENET_PLL_PHI1_DFS1_MFN		(64)
+ /* ENET_PLL_PHI1_DFS2_FREQ - 350 Mhz*/
+ #define ENET_PLL_PHI1_DFS2_EN		(1)
+ #define ENET_PLL_PHI1_DFS2_MFI		(2)
