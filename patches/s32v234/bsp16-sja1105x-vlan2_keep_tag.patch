@@ -1,0 +1,38 @@
+diff --git a/tools/firmware_generation/SJA1105Q_firmware_sw0_evb.py b/tools/firmware_generation/SJA1105Q_firmware_sw0_evb.py
+index 9a22fac..0d4501d 100755
+--- a/tools/firmware_generation/SJA1105Q_firmware_sw0_evb.py
++++ b/tools/firmware_generation/SJA1105Q_firmware_sw0_evb.py
+@@ -201,6 +201,14 @@ vlan_lookup_table.append({
+     "TAG_PORT"   : 0x00, # Egress frames are untagged
+     "VLANID"     : default_vlan})
+ 
++vlan_lookup_table.append({
++    "VING_MIRR"  : 0,
++    "VEGR_MIRR"  : 0,
++    "VMEMB_PORT" : 0x1F, # All ports are member of the VLAN
++    "VLAN_BC"    : 0x1F, # Broadcast domain for the VLAN
++    "TAG_PORT"   : 0x1F, # Egress frames are tagged
++    "VLANID"     : 2})
++
+ #############################################################################
+ # L2 Lookup Parameters Table
+ #############################################################################
+diff --git a/tools/firmware_generation/SJA1105Q_firmware_sw1_evb.py b/tools/firmware_generation/SJA1105Q_firmware_sw1_evb.py
+index 5876458..dcc6df0 100755
+--- a/tools/firmware_generation/SJA1105Q_firmware_sw1_evb.py
++++ b/tools/firmware_generation/SJA1105Q_firmware_sw1_evb.py
+@@ -201,6 +201,14 @@ vlan_lookup_table.append({
+     "TAG_PORT"   : 0x00, # Egress frames are untagged
+     "VLANID"     : default_vlan})
+ 
++vlan_lookup_table.append({
++    "VING_MIRR"  : 0,
++    "VEGR_MIRR"  : 0,
++    "VMEMB_PORT" : 0x1F, # All ports are member of the VLAN
++    "VLAN_BC"    : 0x1F, # Broadcast domain for the VLAN
++    "TAG_PORT"   : 0x1F, # Egress frames are tagged
++    "VLANID"     : 2})
++
+ #############################################################################
+ # L2 Lookup Parameters Table
+ #############################################################################
