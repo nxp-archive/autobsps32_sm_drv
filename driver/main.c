@@ -835,6 +835,9 @@ static int __init init(void)
 	}
 
 	f = fopen(F_FILENAME, O_RDONLY, 0);
+	if (IS_ERR(f)) {
+		f = fopen("/lib/firmware/"F_FILENAME, O_RDONLY, 0);
+	}
 	if (!IS_ERR(f)) {
 		do {
 			cnt = fread(f,
