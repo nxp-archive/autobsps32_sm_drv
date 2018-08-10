@@ -1,0 +1,155 @@
+From d234a42be7230d6bb2b7cbb14e1a2b67cb85f810 Wed Jul 18 11:38:46 2018
+From: Zdenek Valek <zdenek.valek@nxp.com>
+Date: Thu, 9 Aug 2018 17:16:00 +0200
+Subject: [PATCH 1/2] s32v234/dts: Add VSDK specific configuration
+
+Signed-off-by: Rosta Hulik <rostislav.hulik@nxp.com>
+Signed-off-by: Ludovit Minarik <ludovit.minarik@nxp.com>
+Signed-off-by: Zdenek Valek <zdenek.valek@nxp.com>
+Signed-off-by: Catalin Udma <catalin-dan.udma@nxp.com>
+---
+
+diff --git a/arch/arm64/boot/dts/freescale/s32v234-evb2016q4.dtsi b/arch/arm64/boot/dts/freescale/s32v234-evb2016q4.dtsi
+index 5af53a79e429..aed49441a1dc 100644
+--- a/arch/arm64/boot/dts/freescale/s32v234-evb2016q4.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32v234-evb2016q4.dtsi
+@@ -215,9 +215,9 @@
+ 	status = "okay";
+ };
+ 
+-&pit1 {
+-	status = "okay";
+-};
++//&pit1 {
++//	status = "okay";
++//};
+ 
+ &pcie {
+ 	status = "okay";
+diff --git a/arch/arm64/boot/dts/freescale/s32v234-evb28899.dtsi b/arch/arm64/boot/dts/freescale/s32v234-evb28899.dtsi
+index 7d183015d46a..457c699d390f 100644
+--- a/arch/arm64/boot/dts/freescale/s32v234-evb28899.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32v234-evb28899.dtsi
+@@ -225,9 +225,9 @@
+ 	status = "okay";
+ };
+ 
+-&pit1 {
+-	status = "okay";
+-};
++//&pit1 {
++//	status = "okay";
++//};
+ 
+ &pcie {
+ 	status = "okay";
+diff --git a/arch/arm64/boot/dts/freescale/s32v234-pcie.dtsi b/arch/arm64/boot/dts/freescale/s32v234-pcie.dtsi
+index 578138d4de12..95e60f141594 100644
+--- a/arch/arm64/boot/dts/freescale/s32v234-pcie.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32v234-pcie.dtsi
+@@ -225,9 +225,9 @@
+ 	status = "okay";
+ };
+ 
+-&pit1 {
+-	status = "okay";
+-};
++//&pit1 {
++//	status = "okay";
++//};
+ 
+ &pcie {
+ 	status = "okay";
+diff --git a/arch/arm64/boot/dts/freescale/s32v234-tmdp.dts b/arch/arm64/boot/dts/freescale/s32v234-tmdp.dts
+index 147c48a19d0c..1a674f85b29a 100644
+--- a/arch/arm64/boot/dts/freescale/s32v234-tmdp.dts
++++ b/arch/arm64/boot/dts/freescale/s32v234-tmdp.dts
+@@ -149,9 +149,9 @@
+ 	status = "okay";
+ };
+ 
+-&pit1 {
+-	status = "okay";
+-};
++//&pit1 {
++//	status = "okay";
++//};
+ 
+ &pinctrl {
+ 	status = "okay";
+diff --git a/arch/arm64/boot/dts/freescale/s32v234.dtsi b/arch/arm64/boot/dts/freescale/s32v234.dtsi
+index 569970ee60f5..061420c486fd 100644
+--- a/arch/arm64/boot/dts/freescale/s32v234.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32v234.dtsi
+@@ -111,6 +111,18 @@
+ 			reg = <0x0 0xFD000000 0x0 0x400000>;    /* 4 MB */
+ 			no-map;
+ 		};
++
++		resmem: rmem@C4F00000 {
++			reg = <0 0xC4F00000 0 0x100000>;
++			no-map;
++		};
++	};
++
++	nxpresmem: themem@C4F00000 {
++		status = "okay";
++		compatible = "nxp,resmem";
++		memory-region = <&resmem>;
++		interrupts = <0 0 4>;
+ 	};
+ 
+ 	timer {
+@@ -483,6 +495,7 @@
+ 				vref = <1800>;
+ 				status = "okay";
+ 			};
++
+ 		};
+ 
+ 		aips1: aips-bus@40080000 {
+@@ -547,15 +560,15 @@
+ 				status = "disabled";
+ 			};
+ 
+-			pit1: pit@400AA000{
+-				compatible = "fsl,s32v234-pit";
+-				reg = <0x0 0x400AA000 0x0 0x1000>;
+-				interrupts= <0 32 4>;
+-				cpu = <1>;
+-				clocks = <&clks S32V234_CLK_PIT1>;
+-				clock-names = "pit";
+-				status = "disabled";
+-			};
++//			pit1: pit@400AA000{
++//				compatible = "fsl,s32v234-pit";
++//				reg = <0x0 0x400AA000 0x0 0x1000>;
++//				interrupts= <0 32 4>;
++//				cpu = <1>;
++//				clocks = <&clks S32V234_CLK_PIT1>;
++//				clock-names = "pit";
++//				status = "disabled";
++//			};
+ 
+ 			fccu: fccu@400B0000 {
+ 				compatible = "fsl,s32v234-fccu";
+diff --git a/arch/arm64/boot/dts/freescale/s32v234sbc.dtsi b/arch/arm64/boot/dts/freescale/s32v234sbc.dtsi
+index 1f2d42783b15..d3dcacabec3f 100644
+--- a/arch/arm64/boot/dts/freescale/s32v234sbc.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32v234sbc.dtsi
+@@ -236,9 +236,9 @@ hdmi: sii9022a@39 {
+ 	status = "okay";
+ };
+ 
+-&pit1 {
+-	status = "okay";
+-};
++//&pit1 {
++//	status = "okay";
++//};
+ 
+ &pcie {
+ 	status = "okay";
+-- 
+2.11.0
+

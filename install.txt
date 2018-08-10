@@ -23,4 +23,4 @@
 
 6.) Create and build SM application, name the binary theA5App.bin
 
-7.) Load the SM driver (insmod sm_drv.ko) which automatically loads theA5App.bin from current working directory.
+7.) Load the SM driver (insmod sm_drv.ko) which automatically loads theA5App.bin from current working directory or from /lib/firmware directory.

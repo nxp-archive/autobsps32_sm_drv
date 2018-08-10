@@ -59,6 +59,7 @@ the Free Software Foundation; either version 2 of the License, or
 #include <linux/semaphore.h>
 #include <linux/mutex.h>
 #include <linux/completion.h>
+#include <linux/signalfd.h>
 /* Miscellaneous */
 #include <linux/delay.h>
 /*  IRQ */
@@ -512,7 +513,7 @@ static int fread(struct file *f,
 
 	oldfs = get_fs();
 	set_fs(get_ds());
-	ret = vfs_read(f, buf, count, &offset);
+	ret = kernel_read(f, buf, count, &offset);
 	set_fs(oldfs);
 	return ret;
 }
