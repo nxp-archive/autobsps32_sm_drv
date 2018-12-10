@@ -1,0 +1,21 @@
+NXP Software Content Register
+
+Release Name:     SM_DRV_S32V234_RTM_1.1.2
+
+Outgoing License: GNU GPLv2 or newer
+
+Package: SM_DRV
+    Description:        This Linux driver is intended to be used as the VideoListener firmware 
+                        boot-loader and interface between user-space application and the firmware. 
+    Version:            RTM 1.1.2
+    Home Page:          https://source.codeaurora.org/external/autobsps32/extra/sm_drv/
+    License:            GNU GPLv2 or newer
+    Format:             source
+    Release Location:   CAF
+
+
+Snippet:
+    Description:        Memory copy fiunction
+    Home Page:          https://sourceforge.net/projects/alcatel/
+    License:            GNU GPLv3 or newer
+    Format:             source
