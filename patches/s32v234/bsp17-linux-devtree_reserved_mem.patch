@@ -1,0 +1,39 @@
+From 1048b5668914b42879b66885933f31eaba650e0d Tue May 22 15:20:50 2018 +0100
+From: Iustin Dumitrescu <iustin.dumitrescu@nxp.com>
+Date: Wed, 9 May 2018 14:09:17 +0100 
+Subject: [PATCH 1/2] s32v234/dts: Add VSDK specific configuration
+
+Signed-off-by: Rosta Hulik <rostislav.hulik@nxp.com>
+Signed-off-by: Ludovit Minarik <ludovit.minarik@nxp.com>
+Signed-off-by: Catalin Udma <catalin-dan.udma@nxp.com>
+Signed-off-by: Zdenek Valek <zdenek.valek@nxp.com>
+---
+ arch/arm64/boot/dts/freescale/s32v234.dtsi | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/s32v234.dtsi b/arch/arm64/boot/dts/freescale/s32v234.dtsi
+index 500c542998d6..2919c53caf7f 100644
+--- a/arch/arm64/boot/dts/freescale/s32v234.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32v234.dtsi
+@@ -111,6 +111,18 @@
+ 			reg = <0x0 0xFD000000 0x0 0x400000>;    /* 4 MB */
+ 			no-map;
+ 		};
++
++		resmem: rmem@C4F00000 {
++			reg = <0 0xC4F00000 0 0x100000>;
++			no-map;
++		};
++	};
++
++	nxpresmem: themem@C4F00000 {
++		status = "okay";
++		compatible = "nxp,resmem";
++		memory-region = <&resmem>;
++		interrupts = <0 0 4>;
+ 	};
+ 
+ 	timer {
+-- 
+2.11.0
+

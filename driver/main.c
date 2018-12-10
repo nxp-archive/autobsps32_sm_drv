@@ -28,8 +28,7 @@
 @brief		This is the VideoListener firmware driver
 @details
 
-Copyright (c) 2016-2018 NXP Semiconductors
-All Rights Reserved.
+Copyright 2016-2018 NXP
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -37,6 +36,7 @@ the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 */
 #include <linux/module.h>
+#include <linux/moduleparam.h>
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/ioport.h>
@@ -67,7 +67,6 @@ the Free Software Foundation; either version 2 of the License, or
 
 #define DEVICE_NAME				"sm_drv"
 #define F_BUF_SIZE				1024U
-#define F_FILENAME				"theA5App.bin"
 
 #define SC_CMD_LL_INIT				0x0
 #define SC_CMD_ENABLE_EVENTS			0x6
@@ -167,6 +166,10 @@ static const struct of_device_id nxp_of_match[] = {
 };
 
 MODULE_DEVICE_TABLE(of, nxp_of_match);
+/* Define module parameter, set default value */
+static char *sm_drv_fw = "/lib/firmware/theA5App.bin";
+module_param(sm_drv_fw, charp, 0);
+MODULE_PARM_DESC(sm_drv_fw, "Firmware file to load. Default is /lib/firmware/theA5App.bin");
 
 static struct file *fopen(const char *filename, int flags, int mode);
 static void fclose(struct file *f);
@@ -748,6 +751,7 @@ static irqreturn_t sm_irq_handler(int irq, void *dev_id)
 	return 0;
 }
 
+/** @implements VLREQ048 */
 static int __init init(void)
 {
 	int ret = 0;
@@ -835,10 +839,8 @@ static int __init init(void)
 		goto finalize3;
 	}
 
-	f = fopen(F_FILENAME, O_RDONLY, 0);
-	if (IS_ERR(f)) {
-		f = fopen("/lib/firmware/"F_FILENAME, O_RDONLY, 0);
-	}
+/*  Try to open firmware. Filename is in sm_drv_fw variable */
+	f = fopen(sm_drv_fw, O_RDONLY, 0);
 	if (!IS_ERR(f)) {
 		do {
 			cnt = fread(f,
@@ -852,13 +854,13 @@ static int __init init(void)
 		dev_info(sm_drv.device,
 			"%lld bytes from %s written @%llx\n",
 			offset,
-			F_FILENAME,
+			sm_drv_fw,
 			baddr);
 		fclose(f);
 		kfree(buffer);
 	} else {
 		dev_err(sm_drv.device, "failed loading %s @%llx\n",
-			F_FILENAME,
+			sm_drv_fw,
 			baddr);
 		ret = -EIO;	 /*  TODO: Should use "errno" */
 		goto finalize4;

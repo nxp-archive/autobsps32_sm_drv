@@ -1,8 +1,6 @@
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #   File: Makefile
-#   Copyright (c) 2016-2018 NXP Semiconductors
-#
-#   All Rights Reserved.
+#   Copyright 2016-2018 NXP
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
